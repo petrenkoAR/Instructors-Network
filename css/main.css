@@ -1,2 +1,10 @@
 @import url(reset.css);
 @import url(./fonts/fonts.css);
+
+body {
+  background-color: #36393F;
+}
+
+.frame {
+  background-color: #36393F;
+}
