@@ -3,9 +3,16 @@
 
 body {
   background-color: #36393F;
+  padding: 5vh 5vw;
 }
 
 .frame {
   background-color: #36393F;
   color: #FFFFFF;
+}
+
+.question_container {
+  width: 496px;
+  border: 2px solid #FFFFFF;
+  padding: 10px;
 }
