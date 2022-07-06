@@ -1,1 +1,1 @@
-# ADC Generative Art Boilerplate for GitHub Pages
+# Instructor's Network
