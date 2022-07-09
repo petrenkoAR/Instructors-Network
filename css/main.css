@@ -1,28 +1,113 @@
 @import url(reset.css);
 @import url(./fonts/fonts.css);
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap');
 
 body {
-  background-color: #36393F;
-  padding: 5vh 5vw;
+  background-color: #151513;
+  padding: 32px;
+  cursor: url('../images/cursor.svg'), auto;
 }
 
 .main {
+  background-color: #282826;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  border-radius: 32px;
+  overflow: scroll;
+  padding: 48px;
+
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+
+
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+}
+.main::-webkit-scrollbar {
+  display: none;
+}
+
+.information {
+  justify-content: space-between;
+  display: flex;
+}
+
+.testInfo {
+  justify-content: space-between;
+  display: flex;
+
+  position: fixed;
+}
+
+.h1 {
   color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 88px;
+  line-height: 90%;
+}
+
+.h1des {
+  color: #A9A9A8;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
 }
 
 .frame {
-  font-family: 'Inter 100', sans-serif;
-  background-color: #36393F;
+  justify-content: space-between;
+  display: flex;
+  align-items: flex-end;
+}
+
+.button {
+  background-color: #7D4AA9;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 500;
   color: #FFFFFF;
-  border: 2px solid white;
+  padding: 3vw 5vw;
+  border-radius: 100vw;
+
+  transition: 0.5s;
+}
+
+.button:hover {
+  padding: 3.1vw 5.1vw;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.75);
+  cursor: url('../images/cursor-hover.svg'), pointer;
+}
+
+.finishTest {
+  position: absolute;
+  bottom: 80px;
+  right: 80px;
+}
+
+.text {
+  font-family: 'Inter 100', sans-serif;
+  color: #FFFFFF;
+  width: 43vw;
+  font-size: 24px;
+}
+
+.text p:nth-child(2) {
+  margin-top: 0.5vw;
+  color: #D0471D;
+}
+
+.time {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  color: #A9A9A8;
+  font-size: 48px;
 }
 
 .test {
   font-family: 'Inter 100', sans-serif;
-  background-color: #36393F;
   color: #FFFFFF;
-  border: 2px solid white;
   padding: 12px 16px;
 }
 
@@ -33,17 +118,4 @@ body {
   border-radius: 8px;
   padding: 12px 16px;
   margin-bottom: 16px;
-}
-
-.information {
-  justify-content: space-between;
-  display: flex;
-}
-
-.info {
-  display: inline;
-}
-
-.h1 {
-  display: inline;
 }

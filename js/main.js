@@ -182,7 +182,7 @@ let questions = [
 ]
 
 let dText = [
-  'Тест №1', 'Тест состоит из 10 вопросов. На его прохождение вам дается 10 минут. В конце не забудьте заскринить итог и отправить фотокарточку в соответствующий канал. Важно: покидать страницу с тестом нельзя. Иначе придется проходить заново.'
+  'Тест №1', 'Всего в тесте 10 вопросов. На его прохождение вам дается 10 минут. В конце не забудьте заскринить итог и отправить фотокарточку в соответствующий канал.', 'Важно: покидать страницу с тестом нельзя. Иначе тест придется проходить заново.'
 ]
 
 let container = document.getElementsByClassName('main')[0]
@@ -195,19 +195,38 @@ let key = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 let testAnswers = []
 
 document.addEventListener('DOMContentLoaded', () => {
+  info = document.createElement('div');
+  info.classList.add('information');
+  container.appendChild(info);
+
+  header = document.createElement('p')
+  header.classList.add('h1');
+  header.textContent = dText[0];
+  info.appendChild(header);
+
+  header = document.createElement('p')
+  header.classList.add('h1des');
+  header.textContent = 'ТЕСТ НА ПОНИМАНИЕ РП';
+  info.appendChild(header);
+
   frame = document.createElement('div')
   frame.classList.add('frame')
   container.appendChild(frame)
 
-  header = document.createElement('p')
-  header.textContent = dText[0];
-  frame.appendChild(header);
+  text = document.createElement('div')
+  text.classList.add('text')
+  frame.appendChild(text)
 
   description = document.createElement('p')
   description.textContent = dText[1];
-  frame.appendChild(description);
+  text.appendChild(description);
+
+  description = document.createElement('p')
+  description.textContent = dText[2];
+  text.appendChild(description);
 
   but = document.createElement('button')
+  but.classList.add('button')
   but.classList.add('start')
   but.textContent = 'Начать';
   frame.appendChild(but);
@@ -215,21 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
   butStart = document.getElementsByClassName('start')[0]
   butStart.onclick = function() {
     clean();
-
-    info = document.createElement('div');
-    info.classList.add('information');
-    container.appendChild(info);
-
-    header = document.createElement('p')
-    header.classList.add('h1');
-    header.textContent = dText[0];
-    info.appendChild(header);
-
-    time = document.createElement('p')
-    time.classList.add('time')
-    time.textContent = minutes + ':0' + seconds;
-    info.appendChild(time);
-
     createTest();
   }
 })
@@ -259,6 +263,24 @@ function randomTest() {
 
 function createTest() {
   randomTest();
+
+  info = document.createElement('div');
+  info.classList.add('information');
+  info.classList.add('testInfo');
+  container.appendChild(info);
+
+  let infoBlock = document.getElementsByClassName('testInfo')[0]
+  infoBlock.style.width = (window.innerWidth - 160) + 'px';
+
+  header = document.createElement('p')
+  header.classList.add('h1');
+  header.textContent = dText[0];
+  info.appendChild(header);
+
+  time = document.createElement('p')
+  time.classList.add('time')
+  time.textContent = minutes + ':0' + seconds;
+  info.appendChild(time);
 
   test = document.createElement('div')
   test.classList.add('test')
@@ -299,8 +321,9 @@ function createTest() {
   }
 
   but = document.createElement('button')
+  but.classList.add('button')
   but.classList.add('finishTest')
-  but.textContent = 'Закончить тест';
+  but.textContent = 'Завершить';
   test.appendChild(but);
 
   butEnd = document.getElementsByClassName('finishTest')[0]
@@ -315,6 +338,9 @@ function createTest() {
 
 
 function timer(){
+  let infoBlock = document.getElementsByClassName('testInfo')[0]
+  infoBlock.style.width = (window.innerWidth - 160) + 'px';
+
   if ((minutes >= 0) && (seconds > 0)){
     --seconds;
   } else if ((seconds == 0) && (minutes > 0)){
