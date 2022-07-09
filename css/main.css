@@ -1,6 +1,6 @@
 @import url(reset.css);
 @import url(./fonts/fonts.css);
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
 
 body {
   background-color: #151513;
@@ -107,15 +107,70 @@ body {
 
 .test {
   font-family: 'Inter 100', sans-serif;
-  color: #FFFFFF;
-  padding: 12px 16px;
+  padding: 12px 16px 0px;
+  justify-content: center;
+  display: inline-block;
 }
 
 .question_container {
-  display: block;
-  width: 496px;
-  background-color: #6D6F73;
-  border-radius: 8px;
-  padding: 12px 16px;
+  margin: auto;
+
+  width: 861px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border-radius: 32px;
+  padding: 32px;
   margin-bottom: 16px;
+
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.question_container p:nth-child(1) {
+  margin-bottom: 16px;
+}
+.question_container p:nth-child(2) {
+  margin-bottom: 8px;
+}
+.question_container p:nth-child(3) {
+  margin-bottom: 8px;
+}
+.question_container p:nth-child(4) {
+  margin-bottom: 8px;
+}
+.question_container p:nth-child(5) {
+  margin-bottom: 16px;
+}
+.question_container p:nth-child(6) {
+  margin-bottom: 8px;
+  color: #A9A9A8;
+  font-size: 16px;
+}
+
+.test div:nth-child(10) {
+  margin-bottom: 0px;
+}
+
+.input {
+  background: none;
+  padding: 16px 24px;
+  border-radius: 166px;
+  border: 2px solid #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  color: #FFFFFF;
+  width: 100%;
+}
+
+.input:hover {
+  cursor: url('../images/cursor-hover.svg'), auto;
+}
+
+.input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.15);
+  outline-width: 0px;
 }

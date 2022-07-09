@@ -156,7 +156,7 @@ let questions = [
       trueAnswer: 3
     },
     {
-      question: 'Что считается нонРП поведением??',
+      question: 'Что считается нонРП поведением?',
       variants: ['Могу купить оружие и пойти растрелять целую банду.', 'Подойти к человеку и спросить, не является ли он богом.', 'Гулять по Чиллиаду и упасть с него.', 'Написать в WN: "Продаю кар за 300к."'],
       trueAnswer: 1
     }
@@ -188,7 +188,7 @@ let dText = [
 let container = document.getElementsByClassName('main')[0]
 
 let seconds = 0
-let minutes = 1
+let minutes = 10
 let score = 0
 let name = ''
 let key = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -294,7 +294,7 @@ function createTest() {
     let n = Math.floor(Math.random() * 3)
 
     q = document.createElement('p')
-    q.textContent = questions[key[i]][n].question;
+    q.textContent = 'Вопрос ' + (i+1) + '. ' + questions[key[i]][n].question;
     qContainer.appendChild(q);
 
       for (let l = 0; l < 4; l++) {
@@ -310,7 +310,9 @@ function createTest() {
     qContainer.appendChild(answerDescription);
 
     answer = document.createElement('input');
+    answer.classList.add('input')
     answer.classList.add('userAnswer' + i)
+    answer.defaultValue = 'Ваш ответ...'
     qContainer.appendChild(answer);
   }
 
