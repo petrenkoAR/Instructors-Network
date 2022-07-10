@@ -435,7 +435,7 @@ function showResult(){
     return('./images/resultA+.svg')
   } else if ((score == 9) || (score == 8)) {
     return('./images/resultA.svg')
-  } else if (score = 7) {
+  } else if (score == 7) {
     return('./images/resultB.svg')
   } else if ((score == 6) || (score == 5)) {
     return('./images/resultC.svg')
