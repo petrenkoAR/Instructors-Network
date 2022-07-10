@@ -421,7 +421,7 @@ function resultFinishTest() {
   text.appendChild(description);
 
   description = document.createElement('p')
-  description.textContent = 'Не забудьте заскринить результат и отправить его в соостветствующий канал.';
+  description.textContent = 'Не забудьте заскринить результат и отправить его в соответствующий канал.';
   text.appendChild(description);
 
   var img = document.createElement("img");
