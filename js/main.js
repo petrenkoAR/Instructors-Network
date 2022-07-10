@@ -12,7 +12,7 @@ let questions = [
       trueAnswer: 24
     },
     {
-      question: 'Заместителя шерифа похитили. В личные сообщения он отправил вам место, где он находится, и потребовал организовать спасательную операцию. Что вы будете делать?',
+      question: 'Заместителя шерифа похитили. В личные сообщения в дискорде он отправил вам место, где он находится, и потребовал организовать спасательную операцию. Что вы будете делать?',
       variants: ['Тактично откажусь.', 'Соберу всех на ЗП и мы вместе поедем.', 'Дождусь момента, когда запросят переговорщика, и вместе с коллегами поеду пушить.', 'Дождусь требований от бандитов и дальше буду решать, пушить или нет.'],
       trueAnswer: 14
     }
@@ -94,16 +94,16 @@ let questions = [
     {
       question: 'Где отыгровка команды /todo неправильная?',
       variants: ['/todo Что-то я походу забыл *почесав затылок', '/todo Ты чё, это синий *посмотрел на свои джинсы', '/todo Какая сегодня хорошая погода *достав из кармана пачку сигарет.', '/todo девушка, вы отлично выглядите*послав воздушный поцелуй'],
-      trueAnswer: 124
+      trueAnswer: 23
     },
     {
       question: 'Где отыгровка команды /todo правильная?',
       variants: ['/todo Что-то я походу забыл *почесав затылок', '/todo Ты чё, это синий *посмотрел на свои джинсы', '/todo Какая сегодня хорошая погода *достав из кармана пачку сигарет.', '/todo девушка, вы отлично выглядите*послав воздушный поцелуй'],
-      trueAnswer:3
+      trueAnswer: 1
     },
     {
       question: 'В чат вывелась строчка:"Какая сегодня хорошая погода",- сказал(а) Ray Hamster[1], посмотрев на небо. Какая отыгровка использовалась, чтобы получился такой результат? ',
-      variants: ['Какая сегодня хорошая погода /me сказал(а) Ray Hamster[1], посмотрев на небо.', '/do "Какая сегодня хорошая погода"посмотрев на небо', '/do Какая сегодня хорошая погода *посмотрев на небо', '/todo Какая сегодня хорошая погода *посмотрев на небо.'],
+      variants: ['Какая сегодня хорошая погода /me сказал(а) Ray Hamster[1], посмотрев на небо.', '/do "Какая сегодня хорошая погода"посмотрев на небо', '/do Какая сегодня хорошая погода *посмотрев на небо.', '/todo Какая сегодня хорошая погода *посмотрев на небо'],
       trueAnswer: 4
     }
   ],
@@ -182,7 +182,7 @@ let questions = [
 ]
 
 let dText = [
-  'Тест №1', 'Всего в тесте 10 вопросов. На его прохождение вам дается 10 минут. В конце не забудьте заскринить итог и отправить фотокарточку в соответствующий канал.', 'Важно: покидать страницу с тестом нельзя. Иначе тест придется проходить заново.'
+  'Тест №1', 'Всего в тесте 10 вопросов. На его прохождение вам дается 10 минут. В конце не забудьте заскринить итог и отправить фотокарточку в соответствующий канал.', 'Важно: покидать страницу нельзя до того момента, как вы заскрините результат. Иначе тест придется проходить заново.'
 ]
 
 let container = document.getElementsByClassName('main')[0]
@@ -238,17 +238,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })
 
-
-
-
 function clean() {
   while (container.firstChild) {
     container.removeChild(container.firstChild);
   }
 }
-
-
-
 
 function randomTest() {
   for (let i = 0; i < key.length; i++) {
@@ -258,8 +252,6 @@ function randomTest() {
     key[n] = a
   }
 }
-
-
 
 function createTest() {
   randomTest();
@@ -285,6 +277,20 @@ function createTest() {
   test = document.createElement('div')
   test.classList.add('test')
   container.appendChild(test)
+
+  qContainer = document.createElement('div');
+  qContainer.classList.add('user-info_container');
+  qContainer.classList.add('question_container');
+  test.appendChild(qContainer);
+
+  q = document.createElement('p')
+  q.textContent = 'Ваши имя и фамилия.';
+  qContainer.appendChild(q);
+
+  answer = document.createElement('input');
+  answer.classList.add('input')
+  answer.classList.add('user-name')
+  qContainer.appendChild(answer);
 
   for (let i = 0; i < key.length; i++){
     qContainer = document.createElement('div');
@@ -312,14 +318,13 @@ function createTest() {
     answer = document.createElement('input');
     answer.classList.add('input')
     answer.classList.add('userAnswer' + i)
-    answer.defaultValue = 'Ваш ответ...'
     qContainer.appendChild(answer);
   }
 
   window.onblur = function() {
     console.log('Кто-то вышел');
-    // clearInterval(timerId);
-    // clean()
+    clearInterval(timerId);
+    windowClosed()
   }
 
   but = document.createElement('button')
@@ -330,14 +335,12 @@ function createTest() {
 
   butEnd = document.getElementsByClassName('finishTest')[0]
   butEnd.onclick = function() {
+    name = document.getElementsByClassName('user-name')[0].value
     resultFinishTest();
   }
 
   timerId = setInterval(timer, 1000);
 }
-
-
-
 
 function timer(){
   let infoBlock = document.getElementsByClassName('testInfo')[0]
@@ -365,36 +368,30 @@ function timer(){
 }
 
 function checkAnswers() {
+  name = document.getElementsByClassName('user-name')[0].value
   for (let i = 0; i < key.length; i++) {
     let answer = document.getElementsByClassName('userAnswer' + i)[0]
     let n = answer.value
-    console.log('Ответ пользователя: ' + n);
     if (testAnswers[i] == n){
-      console.log(n, testAnswers[i]);
       ++score
     }
   }
 }
 
 function resultTimerEnd() {
-  checkAnswers()
-
-  clearInterval(timerId);
-  console.log('Время кончилось');
-  clean();
-
-  header = document.createElement('p')
-  header.classList.add('h1');
-  header.textContent = 'Время закончилось. Ваш результат: ' + score;
-  container.appendChild(header);
+  alert('Время закончилось.');
+  resultFinishTest();
 }
 
 function resultFinishTest() {
   checkAnswers()
-  console.log('Счет: ' + score);
 
   clean();
   clearInterval(timerId);
+
+  container.style.backgroundImage = "url('./images/result-bg.png')"
+  container.style.backgroundPosition = "center center";
+  container.style.backgroundSize = "cover";
 
   info = document.createElement('div');
   info.classList.add('information');
@@ -402,6 +399,81 @@ function resultFinishTest() {
 
   header = document.createElement('p')
   header.classList.add('h1');
-  header.textContent = 'Тест пройден. Ваш результат:' + score;
+  header.textContent = 'Тест пройден!';
   info.appendChild(header);
+
+  header = document.createElement('p')
+  header.classList.add('h1des');
+  header.textContent = new Date().toLocaleDateString()
+  info.appendChild(header);
+
+  frame = document.createElement('div')
+  frame.classList.add('frame')
+  container.appendChild(frame)
+
+  text = document.createElement('div')
+  text.classList.add('text')
+  frame.appendChild(text)
+
+  description = document.createElement('p')
+  description.textContent = 'Поздравляем, ' + name + '.';
+  description.style.fontSize = '48px'
+  text.appendChild(description);
+
+  description = document.createElement('p')
+  description.textContent = 'Не забудьте заскринить результат и отправить его в соостветствующий канал.';
+  text.appendChild(description);
+
+  var img = document.createElement("img");
+  img.src = showResult();
+  img.style.opacity = "0.3";
+  frame.appendChild(img);
+}
+
+function showResult(){
+  if (score == 10) {
+    return('./images/resultA+.svg')
+  } else if ((score == 9) || (score == 8)) {
+    return('./images/resultA.svg')
+  } else if (score = 7) {
+    return('./images/resultB.svg')
+  } else if ((score == 6) || (score == 5)) {
+    return('./images/resultC.svg')
+  } else if ((score == 4) || (score == 3)) {
+    return('./images/resultD.svg')
+  } else {
+    return('./images/resultF.svg')
+  }
+}
+
+function windowClosed() {
+  clean()
+
+  info = document.createElement('div');
+  info.classList.add('information');
+  container.appendChild(info);
+
+  header = document.createElement('p')
+  header.classList.add('h1');
+  header.textContent = 'Упс, кажется вы свернули тест...';
+  header.style.width = '864px';
+  info.appendChild(header);
+
+  frame = document.createElement('div')
+  frame.classList.add('frame')
+  container.appendChild(frame)
+
+  text = document.createElement('div')
+  text.classList.add('text')
+  frame.appendChild(text)
+
+  description = document.createElement('p')
+  description.textContent = 'Теперь его придется проходить заново.';
+  description.style.color = '#D0471D';
+  description.style.textDecoration = 'underline';
+  text.appendChild(description);
+
+  text.onclick = function() {
+    location.reload();
+  }
 }
