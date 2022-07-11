@@ -233,8 +233,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   butStart = document.getElementsByClassName('start')[0]
   butStart.onclick = function() {
-    clean();
-    createTest();
+    if (window.screen.width == window.outerWidth) {
+      if (window.screen.width > 800) {
+        clean();
+        createTest();
+      } else {
+        alert('К сожалению, тест нельзя проходить с телефона.')
+
+      }
+    } else {
+      alert('Разверните вкладку на весь экран.')
+    }
   }
 })
 
@@ -354,7 +363,7 @@ function timer(){
   } else {
     resultTimerEnd();
     return;
-    //location.reload();
+    location.reload();
   }
 
   timer = document.getElementsByClassName('time')[0]
@@ -421,7 +430,7 @@ function resultFinishTest() {
   text.appendChild(description);
 
   description = document.createElement('p')
-  description.textContent = 'Не забудьте заскринить результат и отправить его в соответствующий канал.';
+  description.textContent = 'Не забудьте заскринить результат и отправить его в соостветствующий канал.';
   text.appendChild(description);
 
   var img = document.createElement("img");
